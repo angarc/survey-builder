@@ -1,0 +1,32 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      Rosewood
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= if Pow.Plug.current_user(@conn) == nil do %>
+            <%= link("Sign Up", to: Routes.pow_registration_path(@conn, :new), class: "button is-primary") %>
+            <%= link("Login", to: Routes.pow_session_path(@conn, :new), class: "button is-light") %>
+          <% else %>
+            <%= link("Logout", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "button is-light") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
