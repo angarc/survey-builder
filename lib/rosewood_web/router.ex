@@ -29,8 +29,10 @@ defmodule RosewoodWeb.Router do
     pow_routes()
   end
 
-  scope "/", RosewoodWeb do
+  scope "/dashboard", RosewoodWeb do
     pipe_through [:browser, :protected]
+
+    get "/", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.
