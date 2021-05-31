@@ -4,6 +4,7 @@ defmodule Rosewood.Users.User do
 
   schema "users" do
     pow_user_fields()
+    has_many :surveys, Rosewood.DataCollection.Survey
 
     timestamps()
   end

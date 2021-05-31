@@ -3,14 +3,25 @@ defmodule Rosewood.DataCollection do
   alias Rosewood.Repo
   alias Rosewood.DataCollection.Survey
 
-  def list_surveys do
-    Repo.all(Survey)
+  def list_surveys(user) do
+    query = from survey in Survey,
+      where: survey.user_id == ^user.id
+    
+    Repo.all(query)
   end
 
-  def get_survey!(id), do: Repo.get!(Survey, id)
+  def get_survey!(user, id) do
+    query = from survey in Survey,
+      where: survey.user_id == ^user.id and survey.id == ^id
 
-  def create_survey(attrs \\ %{}) do
-    %Survey{}
+    [survey | _] = Repo.all(query)
+    survey
+  end
+
+  def create_survey(user, attrs \\ %{}) do
+    survey = Ecto.build_assoc(user, :surveys)
+      
+    survey
     |> Survey.changeset(attrs)
     |> Repo.insert()
   end

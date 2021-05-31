@@ -11,6 +11,8 @@
   <body>
     <%= render RosewoodWeb.SharedView, "_navbar.html", assigns %>
 
-    <%= @inner_content %>
+    <div class="container mt-5">
+      <%= @inner_content %>
+    </div>
   </body>
 </html>

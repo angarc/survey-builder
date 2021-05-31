@@ -1,0 +1,26 @@
+<h1 class='title'>Edit Survey</h1>
+
+<%= form_for @changeset, Routes.dashboard_survey_path(@conn, :update, @changeset.data.id), fn f -> %>
+  <div class='field'>
+    <div class='label'>Title</div>
+    <div class="control">
+      <%= text_input f, :title, class: "input", required: true %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='label'>Code</div>
+    <div class="control">
+      <%= text_input f, :code, class: "input", required: true %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='label'>Description</div>
+    <div class="control">
+      <%= textarea f, :description, class: "textarea" %>
+    </div>
+  </div>
+
+  <%= submit "Create Survey", class: "button is-primary" %>
+<% end %>

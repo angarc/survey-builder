@@ -1,3 +1,27 @@
-<div class="container mt-5">
-  <h1 class="title">Dashboard</h1>
+<div class='title-and-actions'>
+  <h1 class="title mt-4">Dashboard</h1>
+
+  <div class="actions">
+    <%= link("New Survey", to: Routes.dashboard_survey_path(@conn, :new), class: "button is-primary") %>
+  </div>
 </div>
+
+<table class="table is-fullwidth is-bordered is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th>Survey</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for survey <- @surveys do %>
+      <tr>
+        <td><%= link(survey.title, to: Routes.dashboard_survey_path(@conn, :show, survey)) %></td>
+        <td class='has-text-left'>
+          <%= link("Edit", to: Routes.dashboard_survey_path(@conn, :edit, survey), class: "button is-info is-small") %>
+          <%= link("Delete", to: Routes.dashboard_survey_path(@conn, :delete, survey), method: :delete, class: "button is-danger is-small") %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
