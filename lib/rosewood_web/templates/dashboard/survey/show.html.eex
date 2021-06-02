@@ -8,6 +8,8 @@
 
 <div>
   <%= for question <- @questions do %>
-    <%= question.title %><br/>
+    <%= question.title %>
+    <%= link("edit", to: Routes.dashboard_survey_question_path(@conn, :edit, @survey, question))%>
+    <%= link("delete", to: Routes.dashboard_survey_question_path(@conn, :delete, @survey, question), method: :delete)%><br/>
   <% end %>
 </div>

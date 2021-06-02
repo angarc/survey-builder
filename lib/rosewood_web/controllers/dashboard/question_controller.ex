@@ -1,7 +1,6 @@
 defmodule RosewoodWeb.Dashboard.QuestionController do
   use RosewoodWeb, :controller
 
-  alias Rosewood.Repo
   alias Rosewood.DataCollection.Question
   alias Rosewood.DataCollection
 
@@ -44,5 +43,14 @@ defmodule RosewoodWeb.Dashboard.QuestionController do
     DataCollection.update_question(question, question_params)
 
     redirect(conn, to: Routes.dashboard_survey_path(conn, :show, survey))
+  end
+
+  def delete(conn, %{"id" => id, "survey_id" => survey_id}) do
+    survey = DataCollection.get_survey!(Pow.Plug.current_user(conn), survey_id)
+    question = DataCollection.get_question!(survey, id)
+    DataCollection.delete_question(question)
+
+    conn
+    |> redirect(to: Routes.dashboard_survey_path(conn, :show, survey))
   end
 end
