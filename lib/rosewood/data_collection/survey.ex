@@ -3,12 +3,14 @@ defmodule Rosewood.DataCollection.Survey do
   import Ecto.Changeset
 
   alias Rosewood.Users.User
+  alias Rosewood.DataCollection.Question
 
   schema "surveys" do
     field :code, :string
     field :title, :string
     belongs_to :user, User
     field :description, :string
+    has_many :questions, Question
 
     timestamps()
   end

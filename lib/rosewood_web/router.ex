@@ -34,7 +34,9 @@ defmodule RosewoodWeb.Router do
 
     get "/", DashboardController, :index
 
-    resources "/surveys", Dashboard.SurveyController
+    resources "/surveys", Dashboard.SurveyController do
+      resources "/questions", Dashboard.QuestionController
+    end
   end
 
   # Other scopes may use custom stacks.

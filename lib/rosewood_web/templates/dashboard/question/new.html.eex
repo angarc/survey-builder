@@ -1,0 +1,12 @@
+<%= form_for @changeset, Routes.dashboard_survey_question_path(@conn, :create, @survey), fn f -> %>
+  <div class='field'>
+    <label class='label'>Title</label>
+    <div class='control'>
+      <%= text_input f, :title, class: 'input' %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <%= submit "Start adding answers", class: 'button is-primary' %>
+  </div>
+<% end %>

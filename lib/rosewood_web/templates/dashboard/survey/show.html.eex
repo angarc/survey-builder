@@ -1,1 +1,13 @@
-<h1 class='title'><%= @survey.title %></h1>
+<div class='title-and-actions'>
+  <h1 class='title'><%= @survey.title %></h1>
+
+  <div>
+    <%= link('Add Question', to: Routes.dashboard_survey_question_path(@conn, :new, @survey), class: 'button is-primary') %>
+  </div>
+</div>
+
+<div>
+  <%= for question <- @questions do %>
+    <%= question.title %><br/>
+  <% end %>
+</div>

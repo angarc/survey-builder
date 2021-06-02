@@ -5,16 +5,16 @@ defmodule RosewoodWeb.Dashboard.SurveyController do
 
   def new(conn, _params) do
     changeset = Survey.changeset(%Survey{}, %{})
-    
+
     conn
     |> assign(:changeset, changeset)
-    |> render("new.html")  
+    |> render("new.html")
   end
 
   def create(conn, %{"survey" => survey}) do
     current_user = Pow.Plug.current_user(conn)
     case DataCollection.create_survey(current_user, survey) do
-      {:ok, survey} -> 
+      {:ok, survey} ->
         conn
         |> assign(:survey, survey)
         |> render("show.html")
@@ -38,7 +38,7 @@ defmodule RosewoodWeb.Dashboard.SurveyController do
   def update(conn, %{"id" => id, "survey" => survey_params}) do
     current_user = Pow.Plug.current_user(conn)
     survey = DataCollection.get_survey!(current_user, id)
-    DataCollection.update_survey(survey, survey_params) 
+    DataCollection.update_survey(survey, survey_params)
 
     redirect(conn, to: Routes.dashboard_survey_path(conn, :show, survey.id))
   end
@@ -46,9 +46,11 @@ defmodule RosewoodWeb.Dashboard.SurveyController do
   def show(conn, %{"id" => id}) do
     current_user = Pow.Plug.current_user(conn)
     survey = DataCollection.get_survey!(current_user, id)
+    questions = DataCollection.list_questions(survey)
 
     conn
     |> assign(:survey, survey)
+    |> assign(:questions, questions)
     |> render("show.html")
   end
 
